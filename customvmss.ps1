@@ -6,6 +6,6 @@ $name = $content | jq '.name'
 $computername = $content | jq '.vmScaleSetName' -r 
 $id = $name.split("_")[1].split('"')[0]
 $newname = "vm$id"
-Rename-Computer -NewName $newname -Restart
+Rename-Computer -NewName $newname 
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"  -Name "NV Domain" -Value "$computername.eastus2.cloudapp.azure.com"  -Type String
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"  -Name "Domain" -Value "$computername.eastus2.cloudapp.azure.com"  -Type String
