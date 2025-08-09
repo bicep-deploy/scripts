@@ -16,4 +16,3 @@ Start-Sleep -Seconds 2
 Enable-NetAdapter -Name $adapter.Name -Confirm:$false
 netsh int ip reset
 ipconfig /registerdns
-Restart-Computer -Force
