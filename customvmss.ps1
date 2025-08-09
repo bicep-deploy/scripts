@@ -1,3 +1,4 @@
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp"  -Name "UserAuthentication"  -Value 0  -Type DWord
 Invoke-WebRequest https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-windows-amd64.exe -outfile C:\Windows\jq.exe -UseBasicParsing
 $response = Invoke-WebRequest -Uri "http://169.254.169.254/metadata/instance/compute?api-version=2021-02-01&format=json" -Headers @{ "Metadata" = "true" } -Method GET -outfile C:\prefile.json -UseBasicParsing
 $content = Get-Content "C:\prefile.json"
@@ -8,4 +9,3 @@ $newname = "vm$id"
 Rename-Computer -NewName $newname -Restart
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"  -Name "NV Domain" -Value "$computername.eastus2.cloudapp.azure.com"  -Type String
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"  -Name "Domain" -Value "$computername.eastus2.cloudapp.azure.com"  -Type String
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp"  -Name "UserAuthentication"  -Value 0  -Type DWord
