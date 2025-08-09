@@ -9,3 +9,10 @@ $newname = "vm$id"
 Rename-Computer -NewName $newname 
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"  -Name "NV Domain" -Value "$computername.eastus2.cloudapp.azure.com"  -Type String
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"  -Name "Domain" -Value "$computername.eastus2.cloudapp.azure.com"  -Type String
+# Disable and enable the adapter
+Disable-NetAdapter -Name $adapter.Name -Confirm:$false
+Start-Sleep -Seconds 2
+Enable-NetAdapter -Name $adapter.Name -Confirm:$false
+netsh int ip reset
+ipconfig /registerdns
+Restart-Computer -Force
