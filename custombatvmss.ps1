@@ -7,7 +7,7 @@ $id = $name.split("_")[1].split('"')[0]
 $newname = "vm$id"
 Rename-Computer -NewName $newname -Restart
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"  -Name "NV Domain" -Value "$computername.eastus2.cloudapp.azure.com"  -Type String
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"  -Name 'Domain' -Value '$computername.eastus2.cloudapp.azure.com'  -Type String
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"  -Name 'Domain' -Value "$computername.eastus2.cloudapp.azure.com"  -Type String
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp"  -Name "UserAuthentication"  -Value 0  -Type DWord
 $adapter = Get-NetAdapter | Where-Object { $_.Status -eq "Up" } | Select-Object -First 1
 # Disable and enable the adapter
